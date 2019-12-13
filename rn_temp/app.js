@@ -73,14 +73,18 @@ let App = class App extends Component {
   }
 
 };
-// 渲染
+
+// 将状态栏高度挂载全局
 
 App.config = {
+  // 用于设置小程序的状态栏、导航条、标题、窗口背景色
   window: {
-    backgroundTextStyle: 'light',
-    navigationBarBackgroundColor: '#fff',
-    navigationBarTitleText: 'WeChat',
-    navigationBarTextStyle: 'black'
+    // backgroundTextStyle: 'light',
+    // navigationBarBackgroundColor: '#fff',
+    // navigationBarTitleText: 'Taro-app',
+    // navigationBarTextStyle: 'black',
+    // 隐藏导航栏
+    navigationStyle: 'custom'
   }
   // 路由
   ,
@@ -117,6 +121,14 @@ App.config = {
     }]
   }
 };
+Taro.getSystemInfo({}).then(res => {
+  // 获取系统信息 
+  // console.log(`res:${JSON.stringify(res)}`)
+  // console.log(`height:${res.statusBarHeight}`)
+  Taro.$navBarMarginTop = res.statusBarHeight || 0;
+});
+
+// 渲染
 const RootStack = TaroRouter.initRouter([['pages/index/index', pagesIndexIndex], ['pages/cate/index', pagesCateIndex], ['pages/cart/index', pagesCartIndex], ['pages/user/index', pagesUserIndex]], Taro, App.config);
 Taro.initNativeApi(Taro);
 Taro.initPxTransform({

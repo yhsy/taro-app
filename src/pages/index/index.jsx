@@ -1,11 +1,17 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Button, Text } from '@tarojs/components'
+
+// Redux
 import { connect } from '@tarojs/redux'
 
+// Redux-方法
 import { add, minus, asyncAdd } from '../../actions/counter'
 
+// 样式
 import './index.scss'
 
+// 自定义组件
+import NavBar from '@components/navbar'
 
 @connect(({ counter }) => ({
   counter
@@ -20,9 +26,18 @@ import './index.scss'
     dispatch(asyncAdd())
   }
 }))
+
 class Index extends Component {
-    config = {
-    navigationBarTitleText: '首页'
+  //  页面标题
+  config = {
+    // navigationBarTitleText: '首页',
+    // navigationBarBackgroundColor: '#ffffff',
+    // navigationBarTextStyle: 'black',
+    // navigationBarTitleText: '首页',
+    // backgroundColor: '#f00',
+    // backgroundTextStyle: 'light',
+    // 隐藏导航栏(全局)
+    navigationStyle: 'custom'
   }
 
   componentWillReceiveProps (nextProps) {
@@ -38,6 +53,8 @@ class Index extends Component {
   render () {
     return (
       <View className='index'>
+        {/* <NavBar></NavBar> */}
+        <NavBar />
         <Button className='add_btn' onClick={this.props.add}>+</Button>
         <Button className='dec_btn' onClick={this.props.dec}>-</Button>
         <Button className='dec_btn' onClick={this.props.asyncAdd}>async</Button>

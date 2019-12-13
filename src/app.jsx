@@ -36,11 +36,14 @@ class App extends Component {
       // 我的
       'pages/user/index'
     ],
+    // 用于设置小程序的状态栏、导航条、标题、窗口背景色
     window: {
-      backgroundTextStyle: 'light',
-      navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: 'WeChat',
-      navigationBarTextStyle: 'black'
+      // backgroundTextStyle: 'light',
+      // navigationBarBackgroundColor: '#fff',
+      // navigationBarTitleText: 'Taro-app',
+      // navigationBarTextStyle: 'black',
+      // 隐藏导航栏
+      navigationStyle: 'custom'
     },
     // 全局tabBar配置
     tabBar: {
@@ -93,5 +96,15 @@ class App extends Component {
     )
   }
 }
+
+// 将状态栏高度挂载全局
+Taro.getSystemInfo({})
+  .then(res  => {
+      // 获取系统信息 
+      // console.log(`res:${JSON.stringify(res)}`)
+      // console.log(`height:${res.statusBarHeight}`)
+      Taro.$navBarMarginTop =  res.statusBarHeight || 0;
+  })
+
 // 渲染
 Taro.render(<App />, document.getElementById('app'))
