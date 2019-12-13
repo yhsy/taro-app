@@ -53,13 +53,24 @@ class Index extends Component {
   render () {
     return (
       <View className='index'>
-        {/* <NavBar></NavBar> */}
+        {/* 导航栏 */}
         <NavBar />
-        <Button className='add_btn' onClick={this.props.add}>+</Button>
-        <Button className='dec_btn' onClick={this.props.dec}>-</Button>
-        <Button className='dec_btn' onClick={this.props.asyncAdd}>async</Button>
-        <View><Text>{this.props.counter.num}</Text></View>
-        <View><Text>Hello, World</Text></View>
+
+        <Button className='add_btn' onClick={this.props.add}>
+          <Text className='add_btn_text'>+</Text>
+        </Button>
+        <Button className='dec_btn' onClick={this.props.dec}>
+          <Text className='add_btn_text'>-</Text>
+        </Button>
+        <Button className='asc_btn' onClick={this.props.asyncAdd}>
+          <Text className='add_btn_text'>async</Text>
+        </Button>
+        <View className='num'>
+          <Text className='num_text'>{this.props.counter.num}</Text>
+        </View>
+        <View>
+          <Text className="hello">Hello, World</Text>
+        </View>
       </View>
     )
   }

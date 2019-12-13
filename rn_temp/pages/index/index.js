@@ -47,11 +47,22 @@ let Index = (_dec = connect(({ counter }) => ({
     return <View style={_styleSheet["index"]}>
         {}
         <NavBar />
-        <Button onClick={this.props.add} style={_styleSheet["add_btn"]}>+</Button>
-        <Button onClick={this.props.dec} style={_styleSheet["dec_btn"]}>-</Button>
-        <Button onClick={this.props.asyncAdd} style={_styleSheet["dec_btn"]}>async</Button>
-        <View><Text>{this.props.counter.num}</Text></View>
-        <View><Text>Hello, World</Text></View>
+
+        <Button onClick={this.props.add} style={_styleSheet["add_btn"]}>
+          <Text style={_styleSheet["add_btn_text"]}>+</Text>
+        </Button>
+        <Button onClick={this.props.dec} style={_styleSheet["dec_btn"]}>
+          <Text style={_styleSheet["add_btn_text"]}>-</Text>
+        </Button>
+        <Button onClick={this.props.asyncAdd} style={_styleSheet["asc_btn"]}>
+          <Text style={_styleSheet["add_btn_text"]}>async</Text>
+        </Button>
+        <View style={_styleSheet["num"]}>
+          <Text style={_styleSheet["num_text"]}>{this.props.counter.num}</Text>
+        </View>
+        <View>
+          <Text style={_styleSheet["hello"]}>Hello, World</Text>
+        </View>
       </View>;
   }
 }) || _class);
