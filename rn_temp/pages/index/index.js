@@ -58,7 +58,7 @@ let Index = (_dec = connect(({ counter }) => ({
           <Text style={_styleSheet["add_btn_text"]}>async</Text>
         </Button>
         <View style={_styleSheet["num"]}>
-          <Text style={_styleSheet["num_text"]}>{this.props.counter.num}</Text>
+    <Text style={_styleSheet["num_text"]}>{this.props.counter.name}{this.props.counter.num}</Text>
         </View>
         <View>
           <Text style={_styleSheet["hello"]}>Hello, World</Text>

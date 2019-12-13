@@ -2,7 +2,8 @@ import { ADD, MINUS } from "../constants/counter";
 
 export const add = () => {
   return {
-    type: ADD
+    type: ADD,
+    payload: 2
   };
 };
 export const minus = () => {

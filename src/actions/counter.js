@@ -5,7 +5,8 @@ import {
 
 export const add = () => {
   return {
-    type: ADD
+    type: ADD,
+    payload: 2
   }
 }
 export const minus = () => {

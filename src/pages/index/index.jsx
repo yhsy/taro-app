@@ -66,7 +66,7 @@ class Index extends Component {
           <Text className='add_btn_text'>async</Text>
         </Button>
         <View className='num'>
-          <Text className='num_text'>{this.props.counter.num}</Text>
+    <Text className='num_text'>{this.props.counter.name}{this.props.counter.num}</Text>
         </View>
         <View>
           <Text className="hello">Hello, World</Text>
