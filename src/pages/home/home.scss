@@ -1,0 +1,37 @@
+.index {
+    flex-direction: column;
+    width: 100%;
+  }
+  .add_btn {
+    background-color: #f00;
+  }
+  .add_btn_text {
+    color: #fff;
+    font-size: 50px;
+    font-weight: bold;
+  }
+  .dec_btn{
+    background-color: blue;
+  }
+  .asc_btn{
+    background-color: green;
+  }
+  .num{
+    padding: 20px;
+  }
+  .num_text{
+    font-size: 40px;
+    text-align: center;
+    font-weight: bold;
+  }
+  .hello{
+    padding: 10px;
+    margin-top: 30px;
+    border-width: 5px;
+    border-color: #000;
+    border-style: solid;
+    font-size: 30px;
+    color: #f00;
+    font-weight: bold;
+  }
+  

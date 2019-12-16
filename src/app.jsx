@@ -10,17 +10,36 @@ import { Provider } from '@tarojs/redux'
 import Index from './pages/index'
 
 // Redux的配置文件
-import configStore from './store'
+// import configStore from './store'
+
 // 全局样式
 import './app.scss'
+
+
 
 // 如果需要在 h5 环境中开启 React Devtools
 // 取消以下注释：
 // if (process.env.NODE_ENV !== 'production' && process.env.TARO_ENV === 'h5')  {
 //   require('nerv-devtools')
 // }
+
 // Redux入口(通过Provider,全局使用Redux)
-const store = configStore()
+// const store = configStore()
+
+/* Dva状态管理-start */
+// Dva配置
+import dva from './store/dva'
+import models from './models'
+
+const dvaApp = dva.createApp({
+  initialState: {},
+  models: models,
+  onError(e, dispatch) {
+    dispatch(action("sys/error", e));
+  },
+});
+const store = dvaApp.getStore();
+/* Dva状态管理-end */
 
 class App extends Component {
   // 路由配置
@@ -28,7 +47,8 @@ class App extends Component {
     // 路由
     pages: [
       // 首页
-      'pages/index/index',
+      // 'pages/index/index',
+      'pages/home/index',
       // 分类
       'pages/cate/index',
       // 购物车
@@ -52,7 +72,8 @@ class App extends Component {
       backgroundColor: "#fafafa",
       borderStyle: 'black',
       list: [{
-        pagePath: "pages/index/index",
+        // pagePath: "pages/index/index",
+        pagePath: "pages/home/index",
         iconPath: "./assets/tab-bar/home.png",
         selectedIconPath: "./assets/tab-bar/home-active.png",
         text: "首页"
@@ -78,7 +99,9 @@ class App extends Component {
     }
   }
 
-  componentDidMount () {}
+  componentDidMount () {
+    dvaApp.dispatch({type: 'sys/test'})
+  }
 
   componentDidShow () {}
 

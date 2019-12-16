@@ -11,7 +11,7 @@ import assetsTabBarHomePng from '././assets/tab-bar/home.png';
 import pagesUserIndex from './pages/user/index';
 import pagesCartIndex from './pages/cart/index';
 import pagesCateIndex from './pages/cate/index';
-import pagesIndexIndex from './pages/index/index';
+import pagesHomeIndex from './pages/home/index';
 import Taro from '@tarojs/taro-rn';
 import React from 'react';
 // 引入基础的依赖包
@@ -26,7 +26,8 @@ import { Provider } from "@tarojs/taro-redux-rn";
 
 
 // Redux的配置文件
-import configStore from "./store/index";
+// import configStore from './store'
+
 // 全局样式
 import appStyleSheet from "./app_styles";
 
@@ -35,9 +36,25 @@ import appStyleSheet from "./app_styles";
 // if (process.env.NODE_ENV !== 'production' && process.env.TARO_ENV === 'h5')  {
 //   require('nerv-devtools')
 // }
+
 // Redux入口(通过Provider,全局使用Redux)
+// const store = configStore()
+
+/* Dva状态管理-start */
+// Dva配置
+import dva from "./store/dva";
+import models from "./models/index";
+
 var _styleSheet = appStyleSheet;
-const store = configStore();
+const dvaApp = dva.createApp({
+  initialState: {},
+  models: models,
+  onError(e, dispatch) {
+    dispatch(action("sys/error", e));
+  }
+});
+const store = dvaApp.getStore();
+/* Dva状态管理-end */
 
 let App = class App extends Component {
   constructor(props, context) {
@@ -48,6 +65,7 @@ let App = class App extends Component {
 
 
   componentDidMount() {
+    dvaApp.dispatch({ type: 'sys/test' });
     this.componentDidShow();
   }
 
@@ -95,7 +113,8 @@ App.config = {
     backgroundColor: "#fafafa",
     borderStyle: 'black',
     list: [{
-      pagePath: "pages/index/index",
+      // pagePath: "pages/index/index",
+      pagePath: "pages/home/index",
       iconPath: assetsTabBarHomePng,
       selectedIconPath: assetsTabBarHomeActivePng,
 
@@ -129,7 +148,7 @@ Taro.getSystemInfo({}).then(res => {
 });
 
 // 渲染
-const RootStack = TaroRouter.initRouter([['pages/index/index', pagesIndexIndex], ['pages/cate/index', pagesCateIndex], ['pages/cart/index', pagesCartIndex], ['pages/user/index', pagesUserIndex]], Taro, App.config);
+const RootStack = TaroRouter.initRouter([['pages/home/index', pagesHomeIndex], ['pages/cate/index', pagesCateIndex], ['pages/cart/index', pagesCartIndex], ['pages/user/index', pagesUserIndex]], Taro, App.config);
 Taro.initNativeApi(Taro);
 Taro.initPxTransform({
   "designWidth": 750,
