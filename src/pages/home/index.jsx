@@ -12,6 +12,8 @@ import './home.scss'
 
 @connect(({count, loading}) => ({
   ...count,
+  // 异步loading状态
+  isLoading: loading.effects["count/asyncAddNum"],
 }))
 
 export default class Home extends Component {
@@ -33,10 +35,15 @@ export default class Home extends Component {
   // 减法运算
   minusNum = () => {
     this.props.dispatch(action("count/minusNum",this.props.cNum));
+  } 
+
+  // 异步加法
+  asyncAddNum = () => {
+    this.props.dispatch(action("count/asyncAddNum"));
   }
 
   render() {
-    const {cNum} = this.props;
+    const { cNum, isLoading} = this.props;
     return (
         <View className='index'>
           {/* 导航栏 */}
@@ -48,13 +55,14 @@ export default class Home extends Component {
           <Button className='dec_btn' onClick={this.minusNum}>
             <Text className='add_btn_text'>-</Text>
           </Button>
-          {/* 
-            <Button className='asc_btn' onClick={this.props.asyncAdd}>
-                <Text className='add_btn_text'>async</Text>
-            </Button> 
-          */}
+          
+          <Button className='asc_btn' onClick={this.asyncAddNum}>
+              <Text className='add_btn_text'>async+5</Text>
+          </Button> 
+         
           <View className='num'>
-            <Text className='num_text'>{cNum}</Text>
+            {/* <Text className='num_text'>{cNum}</Text> */}
+            <Text className='num_text'>{isLoading ? '异步加载中' : cNum}</Text>
           </View>
         </View>
       )
