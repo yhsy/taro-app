@@ -3,8 +3,12 @@ import { View, Text , Button} from '@tarojs/components';
 
 class User extends PureComponent {
 
-   config = {
-       navigationBarTitleText: '我的'
+  config = {
+    navigationBarTitleText: '我的页',
+    backgroundTextStyle: 'light',
+    navigationBarBackgroundColor: '#fff',
+    navigationBarTextStyle: 'black',
+    navigationStyle: 'default',
   }
 
   state={}

@@ -57,8 +57,19 @@ export default {
                     duration: 2000
                 })
             }
+            // 登录成功-跳转到首页
+            // 关闭所有页面，打开到应用内的某个页面
+            Taro.reLaunch({
+                url: 'page/home/index'
+            })
+            // 方法2:返回页面方式
+            // Taro.navigateBack({
+            //     url: 'page/home/index'
+            // })
+
             // 个人信息-数据同步
             yield put(action("loginOk", {userInfo: resData}))
+
         },
     },
     reducers: {

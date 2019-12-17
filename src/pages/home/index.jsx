@@ -61,6 +61,25 @@ export default class Home extends Component {
     this.props.dispatch(action("user/login",payload));
   }
 
+  navTo = () => {
+    // 保留当前页面，跳转到应用内的某个页面。但是不能跳到 tabbar 页面。
+    Taro.navigateTo({
+      url: 'pages/user/user-login'
+    })
+    // 关闭当前页面，跳转到应用内的某个页面。但是不允许跳转到 tabbar 页面。
+    // Taro.redirectTo({
+    //   url: 'pages/user/user-login'
+    // })
+    // 关闭所有页面，打开到应用内的某个页面
+    // Taro.reLaunch({
+    //   url: 'pages/user/user-login'
+    // })
+    // 跳转到 tabBar 页面，并关闭其他所有非 tabBar 页面
+    // Taro.switchTab({
+    //   url: 'pages/user/user-login'
+    // })
+  }
+
   render() {
     // redux里的数据
     const { cNum, isLoading, userInfo} = this.props;
@@ -87,58 +106,76 @@ export default class Home extends Component {
             {/* <Text className='num_text'>{cNum}</Text> */}
             <Text className='num_text'>{isLoading ? '异步加载中' : cNum}</Text>
           </View>
+          {/* 
+            <View className='m_login'>
+              <View className="ipt_item">
+                <Text className='ipt_label'>账号:</Text>
+                <Input 
+                  className='ipt_text' 
+                  type='text' 
+                  placeholder='请输入账号'
+                  value={username}
+                  onInput={(e)=>{
+                    // console.log(e.target.value)
+                    const val = e.target.value;
+                    this.setState({
+                      username: val
+                    })
+                  }}
+                />
+              </View>
+              <View className="ipt_item">
+                <Text className='ipt_label'>密码:</Text>
+                <Input 
+                  className='ipt_text' 
+                  type="password"
+                  password={true}
+                  placeholder='请输入密码'
+                  value={ password }
+                  onInput={(e)=>{
+                    // console.log(e.target.value)
+                    const val = e.target.value;
+                    this.setState({
+                      password: val
+                    })
+                  }}
+                />
+              </View>
+              <View className="ipt_item">
+                <Button className='btn_login' onClick={this.login}>
+                  <Text className='add_btn_text'>登录</Text>
+                </Button>
+              </View>
 
-          <View className='m_login'>
-            <View className="ipt_item">
-              <Text className='ipt_label'>账号:</Text>
-              <Input 
-                className='ipt_text' 
-                type='text' 
-                placeholder='请输入账号'
-                value={username}
-                onInput={(e)=>{
-                  // console.log(e.target.value)
-                  const val = e.target.value;
-                  this.setState({
-                    username: val
-                  })
-                }}
-              />
-            </View>
-            <View className="ipt_item">
-              <Text className='ipt_label'>密码:</Text>
-              <Input 
-                className='ipt_text' 
-                type="password"
-                password={true}
-                placeholder='请输入密码'
-                value={ password }
-                onInput={(e)=>{
-                  // console.log(e.target.value)
-                  const val = e.target.value;
-                  this.setState({
-                    password: val
-                  })
-                }}
-              />
-            </View>
-            <View className="ipt_item">
-              <Button className='btn_login' onClick={this.login}>
-                <Text className='add_btn_text'>登录</Text>
-              </Button>
-            </View>
+                {
+                  userInfo.msg && (
+                    <View className="user_info">
+                      <Text className="text-red">{`个人信息:${userInfo.msg}`}</Text>
+                      <Text>{`用户ID:${userInfo.data.id}`}</Text>
+                      <Text>{`用户昵称:${userInfo.data.nickname}`}</Text>
+                      <Image src={userInfo.data.avatar} />
+                    </View>
+                  )
+                }
 
-              {
-                userInfo.msg && (
-                  <View className="user_info">
-                    <Text className="text-red">{`个人信息:${userInfo.msg}`}</Text>
-                    <Text>{`用户ID:${userInfo.data.id}`}</Text>
-                    <Text>{`用户昵称:${userInfo.data.nickname}`}</Text>
-                    <Image src={userInfo.data.avatar} />
-                  </View>
-                )
-              }
+            </View> 
+          */}
 
+          {
+            userInfo.msg && (
+              <View className="user_info">
+                <Text className="text-red">{`个人信息:${userInfo.msg}`}</Text>
+                <Text>{`用户ID:${userInfo.data.id}`}</Text>
+                <Text>{`用户昵称:${userInfo.data.nickname}`}</Text>
+                <Image src={userInfo.data.avatar} />
+              </View>
+            )
+          }
+
+          <View className='m_navigation'>
+            <Button className='btn_login' onClick={this.navTo}>
+              <Text className='add_btn_text'>点击跳到登录页</Text>
+            </Button>
           </View>
         </View>
       )

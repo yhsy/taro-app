@@ -3,8 +3,12 @@ import { View, Text , Button} from '@tarojs/components';
 
 class Cart extends PureComponent {
 
-   config = {
-       navigationBarTitleText: '购物车'
+  config = {
+    navigationBarTitleText: '购物车页',
+    backgroundTextStyle: 'light',
+    navigationBarBackgroundColor: '#fff',
+    navigationBarTextStyle: 'black',
+    navigationStyle: 'default',
   }
 
   state={}

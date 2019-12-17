@@ -54,7 +54,9 @@ class App extends Component {
       // 购物车
       'pages/cart/index',
       // 我的
-      'pages/user/index'
+      'pages/user/index',
+      // 登录页
+      'pages/user/user-login'
     ],
     // 用于设置小程序的状态栏、导航条、标题、窗口背景色
     window: {

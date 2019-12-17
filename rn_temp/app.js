@@ -8,6 +8,7 @@ import assetsTabBarCateActivePng from '././assets/tab-bar/cate-active.png';
 import assetsTabBarCatePng from '././assets/tab-bar/cate.png';
 import assetsTabBarHomeActivePng from '././assets/tab-bar/home-active.png';
 import assetsTabBarHomePng from '././assets/tab-bar/home.png';
+import pagesUserUserLogin from './pages/user/user-login';
 import pagesUserIndex from './pages/user/index';
 import pagesCartIndex from './pages/cart/index';
 import pagesCateIndex from './pages/cate/index';
@@ -148,7 +149,7 @@ Taro.getSystemInfo({}).then(res => {
 });
 
 // 渲染
-const RootStack = TaroRouter.initRouter([['pages/home/index', pagesHomeIndex], ['pages/cate/index', pagesCateIndex], ['pages/cart/index', pagesCartIndex], ['pages/user/index', pagesUserIndex]], Taro, App.config);
+const RootStack = TaroRouter.initRouter([['pages/home/index', pagesHomeIndex], ['pages/cate/index', pagesCateIndex], ['pages/cart/index', pagesCartIndex], ['pages/user/index', pagesUserIndex], ['pages/user/user-login', pagesUserUserLogin]], Taro, App.config);
 Taro.initNativeApi(Taro);
 Taro.initPxTransform({
   "designWidth": 750,

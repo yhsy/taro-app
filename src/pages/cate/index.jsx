@@ -3,9 +3,15 @@ import { View, Text , Button} from '@tarojs/components';
 
 class Cate extends PureComponent {
 
-   config = {
-       navigationBarTitleText: '分类'
+
+  config = {
+      navigationBarTitleText: '分类页',
+      backgroundTextStyle: 'light',
+      navigationBarBackgroundColor: '#fff',
+      navigationBarTextStyle: 'black',
+      navigationStyle: 'default',
   }
+
 
   state={}
 
