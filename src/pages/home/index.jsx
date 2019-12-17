@@ -1,17 +1,22 @@
+// 默认依赖
 import Taro, {Component} from '@tarojs/taro'
-import { View, Button, Text } from '@tarojs/components'
+import { View, Button, Text, Input } from '@tarojs/components'
 
+// 状态管理
 import {create} from 'dva-core';
 import {connect} from '@tarojs/redux'
-import action from '../../utils/action'
+// Action方法
+import action from '@utils/action'
 
 // 自定义组件
 import NavBar from '@components/navbar'
 
+// 样式
 import './home.scss'
 
-@connect(({count, loading}) => ({
+@connect(({count, user, loading}) => ({
   ...count,
+  ...user,
   // 异步loading状态
   isLoading: loading.effects["count/asyncAddNum"],
 }))
@@ -25,6 +30,10 @@ export default class Home extends Component {
 
   constructor() {
     super(...arguments);
+    this.state = {
+      username: '',
+      password: '',
+    }
   }
 
   // 加法运算
@@ -42,8 +51,22 @@ export default class Home extends Component {
     this.props.dispatch(action("count/asyncAddNum"));
   }
 
+  // 登录
+  login = () => {
+    const { username,password} = this.state;
+    const payload = {
+      username,
+      password,
+    }
+    this.props.dispatch(action("user/login",payload));
+  }
+
   render() {
-    const { cNum, isLoading} = this.props;
+    // redux里的数据
+    const { cNum, isLoading, userInfo} = this.props;
+    // 组件的state
+    const { username, password } = this.state;
+
     return (
         <View className='index'>
           {/* 导航栏 */}
@@ -63,6 +86,49 @@ export default class Home extends Component {
           <View className='num'>
             {/* <Text className='num_text'>{cNum}</Text> */}
             <Text className='num_text'>{isLoading ? '异步加载中' : cNum}</Text>
+          </View>
+
+          <View className='m_login'>
+            <View className="ipt_item">
+              <Text className='ipt_label'>账号:</Text>
+              <Input 
+                className='ipt_text' 
+                type='text' 
+                placeholder='请输入账号'
+                value={username}
+                onInput={(e)=>{
+                  console.log(e.target.value)
+                  const val = e.target.value;
+                  this.setState({
+                    username: val
+                  })
+                }}
+              />
+            </View>
+            <View className="ipt_item">
+              <Text className='ipt_label'>密码:</Text>
+              <Input 
+                className='ipt_text' 
+                type='password' 
+                placeholder='请输入密码'
+                value={ password }
+                onInput={(e)=>{
+                  // console.log(e.target.value)
+                  const val = e.target.value;
+                  this.setState({
+                    password: val
+                  })
+                }}
+              />
+            </View>
+            <View className="ipt_item">
+              <Button className='btn_login' onClick={this.login}>
+                <Text className='add_btn_text'>登录</Text>
+              </Button>
+            </View>
+            <View className="user_info">
+              <Text className="text-red">{userInfo.msg}</Text>
+            </View>
           </View>
         </View>
       )
