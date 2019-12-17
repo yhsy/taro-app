@@ -1,6 +1,6 @@
 // 默认依赖
 import Taro, {Component} from '@tarojs/taro'
-import { View, Button, Text, Input } from '@tarojs/components'
+import { View, Button, Text, Input, Image } from '@tarojs/components'
 
 // 状态管理
 import {create} from 'dva-core';
@@ -97,7 +97,7 @@ export default class Home extends Component {
                 placeholder='请输入账号'
                 value={username}
                 onInput={(e)=>{
-                  console.log(e.target.value)
+                  // console.log(e.target.value)
                   const val = e.target.value;
                   this.setState({
                     username: val
@@ -109,7 +109,8 @@ export default class Home extends Component {
               <Text className='ipt_label'>密码:</Text>
               <Input 
                 className='ipt_text' 
-                type='password' 
+                type="password"
+                password={true}
                 placeholder='请输入密码'
                 value={ password }
                 onInput={(e)=>{
@@ -126,9 +127,18 @@ export default class Home extends Component {
                 <Text className='add_btn_text'>登录</Text>
               </Button>
             </View>
-            <View className="user_info">
-              <Text className="text-red">{userInfo.msg}</Text>
-            </View>
+
+              {
+                userInfo.msg && (
+                  <View className="user_info">
+                    <Text className="text-red">{`个人信息:${userInfo.msg}`}</Text>
+                    <Text>{`用户ID:${userInfo.data.id}`}</Text>
+                    <Text>{`用户昵称:${userInfo.data.nickname}`}</Text>
+                    <Image src={userInfo.data.avatar} />
+                  </View>
+                )
+              }
+
           </View>
         </View>
       )
